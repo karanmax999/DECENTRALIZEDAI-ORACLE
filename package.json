@@ -20,7 +20,10 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@openzeppelin/contracts": "^4.9.6"
+    "@openzeppelin/contracts": "^4.9.6",
+    "framer-motion": "^12.23.12",
+    "gsap": "^3.13.0",
+    "react-tilt": "^1.0.2"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.2.2",

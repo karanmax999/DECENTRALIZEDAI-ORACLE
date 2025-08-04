@@ -101,7 +101,12 @@ export function useWallet() {
       await connectWallet(web3Modal);
     } catch (error) {
       console.error("Error connecting wallet:", error);
-      setError("Failed to connect wallet");
+      // Check if the error is due to user closing the modal
+      if (error.message && error.message.includes("User closed modal")) {
+        setError(null); // Don't show error message for user-initiated close
+      } else {
+        setError("Failed to connect wallet");
+      }
       setIsLoading(false);
     }
   };
@@ -133,7 +138,12 @@ export function useWallet() {
       return { provider, signer, account: accounts[0], chainId: network.chainId };
     } catch (error) {
       console.error("Error in connectWallet:", error);
-      setError("Failed to connect wallet");
+      // Check if the error is due to user closing the modal
+      if (error.message && error.message.includes("User closed modal")) {
+        setError(null); // Don't show error message for user-initiated close
+      } else {
+        setError("Failed to connect wallet. Please try again.");
+      }
       setIsLoading(false);
       throw error;
     }

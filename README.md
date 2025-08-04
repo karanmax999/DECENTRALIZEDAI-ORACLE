@@ -14,7 +14,7 @@ The Decentralized AI Oracle is a DeFi infrastructure project that aims to provid
 - **Anomaly Detection**: Sophisticated anomaly detection to identify manipulated or erroneous data
 - **LLM-based Decision Agents**: Reasoning agents that validate data submissions using chain-of-thought logic
 - **Staking Mechanism**: Token staking for governance participation and rewards
-- **Incentive System**: ERC20 reward tokens for accurate data submission and validation
+- **Incentive System**: ERC20 reward tokens for accurate data submission and validation 
 
 ## Tech Stack
 
