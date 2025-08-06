@@ -42,6 +42,97 @@ function MyApp({ Component, pageProps }) {
                   1116: 'https://rpc.coredao.org', // Core blockchain RPC
                 },
                 chainId: 1116,
+                // Add QR Code modal options
+                qrcodeModalOptions: {
+                  mobileLinks: [
+                    'metamask',
+                    'coinbase',
+                    'trust',
+                    'rainbow',
+                    'argent',
+                    'bitpay',
+                    'tokenary',
+                    'zeal',
+                    'xdefi',
+                    'phantom',
+                    'mathwallet',
+                    'okxwallet',
+                    'tokenpocket',
+                    'atoken',
+                    'liquality',
+                    'zerion',
+                    'frame',
+                    'hyperpay',
+                    'tp',
+                    'alphawallet',
+                    'pillar',
+                    'ownbit',
+                    'imtoken',
+                    '1inch',
+                    'bitpie',
+                    'huobiwallet',
+                    'hyperwallet',
+                    'walletio',
+                    'nifty',
+                    'kaikas',
+                    'celestia',
+                    'rabby',
+                    'bifrost',
+                    'bitget',
+                    'zerion',
+                    'bitkeep',
+                    'okexwallet',
+                    'guarda',
+                    'exodus',
+                    'trustwallet',
+                    'coinomi',
+                    'meowwallet',
+                    'roninwallet',
+                    'gamestop',
+                    'bitvavo',
+                    'zkwallet',
+                    'bchain',
+                    'bitpie',
+                    'huobiwallet',
+                    'hyperpay',
+                    'atoken',
+                    'liquality',
+                    'frame',
+                    'phantom',
+                    'mathwallet',
+                    'okxwallet',
+                    'tokenpocket',
+                    'zeal',
+                    'xdefi',
+                    'pillar',
+                    'ownbit',
+                    'imtoken',
+                    '1inch',
+                    'bitpie',
+                    'huobiwallet',
+                    'hyperwallet',
+                    'walletio',
+                    'nifty',
+                    'kaikas',
+                    'celestia',
+                    'rabby',
+                    'bifrost',
+                    'bitget',
+                    'zerion',
+                    'bitkeep',
+                    'okexwallet',
+                    'guarda',
+                    'exodus',
+                    'trustwallet',
+                    'coinomi',
+                    'meowwallet',
+                    'roninwallet',
+                    'gamestop',
+                    'bitvavo',
+                    'zkwallet',
+                    'bchain'
+                  ]
+                }
               },
             },
           },
@@ -67,11 +158,31 @@ function MyApp({ Component, pageProps }) {
 
     initWeb3Modal();
 
+    // Add event listeners for modal closing
+    const handleEscapeKey = (event) => {
+      if (event.key === 'Escape') {
+        window.dispatchEvent(new Event('walletModalClose'));
+      }
+    };
+
+    const handleWindowClick = (event) => {
+      // Check if click is outside the modal
+      const modal = document.querySelector('.w3m-modal');
+      if (modal && !modal.contains(event.target)) {
+        window.dispatchEvent(new Event('walletModalClose'));
+      }
+    };
+
+    window.addEventListener('keydown', handleEscapeKey);
+    window.addEventListener('click', handleWindowClick);
+
     // Cleanup function
     return () => {
       if (web3Modal && web3Modal.clearCachedProvider) {
         web3Modal.clearCachedProvider();
       }
+      window.removeEventListener('keydown', handleEscapeKey);
+      window.removeEventListener('click', handleWindowClick);
     };
   }, []);
 
@@ -82,6 +193,9 @@ function MyApp({ Component, pageProps }) {
         console.error("Web3Modal is not initialized yet");
         return false;
       }
+      
+      // Dispatch event that wallet modal is opening
+      window.dispatchEvent(new Event('walletModalOpen'));
       
       const instance = await modalInstance.connect();
       
@@ -128,7 +242,17 @@ function MyApp({ Component, pageProps }) {
         return false;
       }
     } catch (error) {
+      // Check if the error is due to user closing the modal
+      if (error.message && error.message.includes("User closed modal")) {
+        // This is expected behavior when user closes the modal
+        // Don't log this as an error
+        window.dispatchEvent(new Event('walletModalClose'));
+        return false;
+      }
+      
       console.error("Failed to connect wallet:", error);
+      // Dispatch event that wallet modal is closing (even if there was an error)
+      window.dispatchEvent(new Event('walletModalClose'));
       return false;
     }
   };
@@ -136,6 +260,9 @@ function MyApp({ Component, pageProps }) {
   // Function to disconnect wallet
   const disconnectWallet = () => {
     try {
+      // Dispatch event that wallet modal is closing
+      window.dispatchEvent(new Event('walletModalClose'));
+      
       // Check if provider has disconnect method (WalletConnect has it)
       if (web3State.provider?.disconnect) {
         web3State.provider.disconnect();
@@ -190,7 +317,15 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <Web3Context.Provider value={web3ContextValue}>
-      <Component {...pageProps} />
+      <Component 
+        {...pageProps} 
+        account={web3ContextValue.account}
+        connect={web3ContextValue.connect}
+        disconnect={web3ContextValue.disconnect}
+        isConnected={web3ContextValue.isConnected}
+        isLoading={false} // This would need to be managed at a higher level
+        error={null} // This would need to be managed at a higher level
+      />
     </Web3Context.Provider>
   );
 }

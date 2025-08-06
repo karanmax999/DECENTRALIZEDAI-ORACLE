@@ -35,6 +35,58 @@ export function useWallet() {
                   1116: 'https://rpc.coredao.org', // Core blockchain RPC
                 },
                 chainId: 1116,
+                // Add QR Code modal options
+                qrcodeModalOptions: {
+                  mobileLinks: [
+                    'metamask',
+                    'coinbase',
+                    'trust',
+                    'rainbow',
+                    'argent',
+                    'bitpay',
+                    'tokenary',
+                    'zeal',
+                    'xdefi',
+                    'phantom',
+                    'mathwallet',
+                    'okxwallet',
+                    'tokenpocket',
+                    'atoken',
+                    'liquality',
+                    'zerion',
+                    'frame',
+                    'hyperpay',
+                    'tp',
+                    'alphawallet',
+                    'pillar',
+                    'ownbit',
+                    'imtoken',
+                    '1inch',
+                    'bitpie',
+                    'huobiwallet',
+                    'hyperwallet',
+                    'walletio',
+                    'nifty',
+                    'kaikas',
+                    'celestia',
+                    'rabby',
+                    'bifrost',
+                    'bitget',
+                    'zerion',
+                    'bitkeep',
+                    'okexwallet',
+                    'guarda',
+                    'exodus',
+                    'trustwallet',
+                    'coinomi',
+                    'meowwallet',
+                    'roninwallet',
+                    'gamestop',
+                    'bitvavo',
+                    'zkwallet',
+                    'bchain'
+                  ]
+                }
               },
             },
           },
@@ -62,13 +114,39 @@ export function useWallet() {
       web3Modal = modal;
     });
 
+    // Add event listeners for modal closing
+    const handleEscapeKey = (event) => {
+      if (event.key === 'Escape') {
+        // Reset loading state if modal is closed via escape
+        if (isLoading) {
+          setIsLoading(false);
+          setError(null);
+        }
+      }
+    };
+
+    const handleWindowClick = (event) => {
+      // Check if click is outside the modal
+      const modal = document.querySelector('.w3m-modal');
+      if (modal && !modal.contains(event.target) && isLoading) {
+        // Reset loading state if modal is closed by clicking outside
+        setIsLoading(false);
+        setError(null);
+      }
+    };
+
+    window.addEventListener('keydown', handleEscapeKey);
+    window.addEventListener('click', handleWindowClick);
+
     // Cleanup function
     return () => {
       if (web3Modal && web3Modal.clearCachedProvider) {
         web3Modal.clearCachedProvider();
       }
+      window.removeEventListener('keydown', handleEscapeKey);
+      window.removeEventListener('click', handleWindowClick);
     };
-  }, []);
+  }, [isLoading]);
 
   /**
    * Connect to wallet
@@ -100,11 +178,13 @@ export function useWallet() {
 
       await connectWallet(web3Modal);
     } catch (error) {
-      console.error("Error connecting wallet:", error);
       // Check if the error is due to user closing the modal
       if (error.message && error.message.includes("User closed modal")) {
-        setError(null); // Don't show error message for user-initiated close
+        // This is expected behavior when user closes the modal
+        // Don't show error message or log as error
+        setError(null);
       } else {
+        console.error("Error connecting wallet:", error);
         setError("Failed to connect wallet");
       }
       setIsLoading(false);
@@ -137,11 +217,13 @@ export function useWallet() {
 
       return { provider, signer, account: accounts[0], chainId: network.chainId };
     } catch (error) {
-      console.error("Error in connectWallet:", error);
       // Check if the error is due to user closing the modal
       if (error.message && error.message.includes("User closed modal")) {
-        setError(null); // Don't show error message for user-initiated close
+        // This is expected behavior when user closes the modal
+        // Don't show error message or log as error
+        setError(null);
       } else {
+        console.error("Error in connectWallet:", error);
         setError("Failed to connect wallet. Please try again.");
       }
       setIsLoading(false);
@@ -251,4 +333,4 @@ export function useWallet() {
     isConnectedToCore,
     switchToCore,
   };
-} 
+}
