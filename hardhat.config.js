@@ -9,15 +9,15 @@ module.exports = {
   solidity: "0.8.17",
   networks: {
     hardhat: {
-      chainId: 1116, // Core blockchain chainId
+      chainId: 1114, // Core Testnet2 chainId
     },
     core: {
-      url: process.env.CORE_RPC_URL || "https://rpc.coredao.org",
+      url: process.env.CORE_RPC_URL || "https://rpc.test2.btcs.network",
       accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
-      chainId: 1116,
+      chainId: 1114,
     },
   },
   paths: {
     artifacts: "./frontend/artifacts",
   },
-}; 
+};

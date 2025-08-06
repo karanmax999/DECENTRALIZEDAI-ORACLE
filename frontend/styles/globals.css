@@ -271,3 +271,92 @@
     background: radial-gradient(circle, rgba(0, 217, 255, 0.1) 0%, transparent 70%);
   }
 }
+/* WalletConnect Modal Styles */
+#w3m-modal {
+  z-index: 9999 !important;
+  position: relative !important;
+}
+
+.w3m-overlay {
+  z-index: 9998 !important;
+  background: rgba(0, 0, 0, 0.8) !important;
+  backdrop-filter: blur(8px) !important;
+}
+
+/* WalletConnect Modal Custom Styling */
+.w3m-modal__content {
+  background: linear-gradient(
+    135deg,
+    rgba(13, 13, 13, 0.95) 0%,
+    rgba(26, 26, 26, 0.95) 100%
+  ) !important;
+  border: 1px solid rgba(0, 217, 255, 0.3) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 8px 32px rgba(0, 217, 255, 0.2) !important;
+}
+
+.w3m-modal__header {
+  border-bottom: 1px solid rgba(0, 217, 255, 0.2) !important;
+}
+
+.w3m-modal__title {
+  color: #00d9ff !important;
+  font-family: 'JetBrains Mono', monospace !important;
+}
+
+.w3m-provider-container {
+  background: rgba(13, 13, 13, 0.8) !important;
+  border: 1px solid rgba(0, 217, 255, 0.2) !important;
+  border-radius: 12px !important;
+  transition: all 0.3s ease !important;
+}
+
+.w3m-provider-container:hover {
+  background: rgba(0, 217, 255, 0.1) !important;
+  border-color: rgba(0, 217, 255, 0.5) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 16px rgba(0, 217, 255, 0.3) !important;
+}
+
+.w3m-provider-name {
+  color: #ffffff !important;
+  font-family: 'JetBrains Mono', monospace !important;
+}
+
+.w3m-provider-description {
+  color: #888888 !important;
+  font-family: 'JetBrains Mono', monospace !important;
+}
+
+/* Main Content Container */
+#__next {
+  position: relative;
+  z-index: 1;
+}
+
+/* Ensure WalletConnect elements are properly layered */
+.w3m-modal__container {
+  z-index: 10000 !important;
+}
+
+.w3m-modal__backdrop {
+  z-index: 9999 !important;
+}
+
+/* Custom scrollbar for WalletConnect modal */
+.w3m-modal__content::-webkit-scrollbar {
+  width: 6px !important;
+}
+
+.w3m-modal__content::-webkit-scrollbar-track {
+  background: rgba(13, 13, 13, 0.5) !important;
+}
+
+.w3m-modal__content::-webkit-scrollbar-thumb {
+  background: rgba(0, 217, 255, 0.5) !important;
+  border-radius: 3px !important;
+}
+
+.w3m-modal__content::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 217, 255, 0.8) !important;
+}

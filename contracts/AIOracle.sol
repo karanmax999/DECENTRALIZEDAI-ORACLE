@@ -14,7 +14,6 @@ contract AIOracle is IAIOracle {
     // Counter for submission IDs
     uint256 private _submissionCounter;
     
-    // Threshold for minimum votes required to verify data
     uint256 public minVotesRequired;
     
     // Percentage of votes needed for verification (out of 100)
@@ -196,4 +195,4 @@ contract AIOracle is IAIOracle {
         require(_verificationThreshold <= 100, "AIOracle: threshold must be between 0-100");
         verificationThreshold = _verificationThreshold;
     }
-} 
+}
