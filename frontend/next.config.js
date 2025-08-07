@@ -2,10 +2,10 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  // Configure image domains if using Next.js Image
   images: {
     domains: ['*'],
-  },
+    unoptimized: true
+  }
 }
 
 module.exports = nextConfig
