@@ -2,11 +2,9 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  // Output as static site
-  output: 'export',
-  // Optional: Configure image domains if using Next.js Image
+  // Configure image domains if using Next.js Image
   images: {
-    unoptimized: true,
+    domains: ['*'],
   },
 }
 
