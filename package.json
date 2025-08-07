@@ -9,7 +9,7 @@
     "deploy": "hardhat run scripts/deploy.js --network core",
     "deploy:local": "hardhat run scripts/deploy.js --network hardhat",
     "dev": "cd frontend && npm run dev",
-    "build": "cd frontend && npm install && npm run build",
+    "build": "cd frontend && npm install tailwindcss autoprefixer postcss && npm run build",
     "start": "cd frontend && npm run start"
   },
   "keywords": [
