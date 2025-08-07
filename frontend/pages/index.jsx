@@ -94,9 +94,9 @@ export default function Home() {
         
         {/* Hero Content */}
         <div className="container mx-auto px-6 py-20 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Left Content */}
-            <div className="animate-fade-in">
+          <div className="flex items-center justify-start">
+            {/* Left Aligned Content */}
+            <div className="animate-fade-in max-w-4xl">
               <h1 className="text-6xl md:text-8xl font-futuristic font-bold mb-8 leading-none">
                 <span className="block text-transparent bg-clip-text bg-gradient-to-r from-primary-glow to-white">
                   NEXT-GEN
@@ -116,7 +116,7 @@ export default function Home() {
                 Experience the future of blockchain intelligence.
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-4 justify-start">
                 <Link href="/dashboard">
                   <button className="btn btn-primary text-lg px-8 py-4">
                     Launch Platform
@@ -127,64 +127,6 @@ export default function Home() {
                     View Documentation
                   </button>
                 </Link>
-              </div>
-            </div>
-            
-            {/* Right Visual - Earth */}
-            <div className="relative flex items-center justify-center animate-float">
-              {/* Earth Sphere */}
-              <div className="relative w-64 h-64 rounded-full bg-gradient-to-br from-blue-500 via-blue-600 to-blue-800 shadow-2xl animate-pulse-glow">
-                {/* Earth Atmosphere Glow */}
-                <div className="absolute -inset-4 rounded-full bg-gradient-to-r from-blue-400/20 to-cyan-300/20 blur-xl"></div>
-                
-                {/* Continents */}
-                <div className="absolute inset-0 rounded-full overflow-hidden">
-                  {/* Africa/Europe */}
-                  <div className="absolute top-12 right-16 w-16 h-20 bg-green-600 rounded-full transform rotate-12 opacity-80"></div>
-                  <div className="absolute top-8 right-12 w-8 h-12 bg-green-700 rounded-full transform rotate-45 opacity-90"></div>
-                  
-                  {/* Americas */}
-                  <div className="absolute top-16 left-8 w-12 h-24 bg-green-600 rounded-full transform -rotate-12 opacity-80"></div>
-                  <div className="absolute top-20 left-12 w-6 h-16 bg-green-700 rounded-full transform rotate-6 opacity-90"></div>
-                  
-                  {/* Asia */}
-                  <div className="absolute top-6 right-8 w-20 h-16 bg-green-600 rounded-full transform rotate-45 opacity-80"></div>
-                  <div className="absolute top-10 right-4 w-10 h-10 bg-green-700 rounded-full opacity-90"></div>
-                  
-                  {/* Cloud Layer */}
-                  <div className="absolute inset-0 rounded-full bg-gradient-to-r from-white/10 via-transparent to-white/15 animate-pulse"></div>
-                  <div className="absolute top-8 left-16 w-20 h-8 bg-white/20 rounded-full blur-sm animate-pulse"></div>
-                  <div className="absolute bottom-12 right-12 w-16 h-6 bg-white/15 rounded-full blur-sm animate-pulse"></div>
-                  <div className="absolute top-20 right-20 w-12 h-4 bg-white/25 rounded-full blur-sm animate-pulse"></div>
-                </div>
-                
-                {/* Orbiting Satellites */}
-                {[...Array(3)].map((_, i) => (
-                  <div
-                    key={i}
-                    className="absolute w-3 h-3 bg-primary-glow rounded-full animate-spin shadow-lg"
-                    style={{
-                      top: '50%',
-                      left: '50%',
-                      transform: `translate(-50%, -50%) rotate(${i * 120}deg) translateX(160px)`,
-                      animationDuration: `${8 + i * 2}s`,
-                      boxShadow: '0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff',
-                    }}
-                  />
-                ))}
-                
-                {/* Earth Rotation Effect */}
-                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-transparent via-white/5 to-transparent animate-spin"
-                     style={{ animationDuration: '20s' }}></div>
-                
-                {/* Space Glow */}
-                <div className="absolute inset-2 rounded-full bg-gradient-to-br from-blue-300/20 to-green-300/20 animate-pulse"></div>
-              </div>
-              
-              {/* Orbital Ring */}
-              <div className="absolute w-80 h-80 border border-primary-glow/30 rounded-full animate-spin" 
-                   style={{ animationDuration: '30s' }}>
-                <div className="absolute top-0 left-1/2 w-2 h-2 bg-accent-glow rounded-full transform -translate-x-1/2 -translate-y-1"></div>
               </div>
             </div>
           </div>
